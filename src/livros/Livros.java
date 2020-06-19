@@ -12,25 +12,65 @@ public class Livros {
     @SuppressWarnings("empty-statement")
     public static void main(String[] args) {
         
-         JSONObject livro2 = new JSONObject();
+     
+        
          JSONObject livro = new JSONObject();
-            
+         JSONObject livro2 = new JSONObject();
+         JSONObject livro3 = new JSONObject();
+         JSONObject livro4 = new JSONObject(); 
+         JSONObject livro5 = new JSONObject();
+         
          List<JSONObject> livros=new ArrayList();
          
+         
+       
+       /* int opcao = 0;
+        JSONObject titulo = livro;
+        String opcoes;
+        opcoes = " selecione o livros da lista : "+livro.get("titulo")+
+                "\nLocalização: "+ livro.get("genero")+
+                "\n\n***Opções*** "+
+                "\n2. Pesquisar Livro (código)"+
+                "\n3. Pesquisar Livro (genero)"+
+                "\n4. Listar Livros"+
+                "\n6. Finalizar"+
+                "\n\nSelecione a opção: ";
+             
+         */     
                  
         //preenche o objeto com os campos: titulo, ano e genero
         livro.put("titulo", "JSON x XML: a Batalha Final");
         livro.put("ano", 2012);
         livro.put("genero", "Ação");
-         livro.put("valor", "R$ 330");
+         livro.put("valor",  330);
          livros.add(livro);
          
          livro2.put("titulo", "java x C++: A Batalha Inicial");
         livro2.put("ano", 2020);
         livro2.put("genero", "ficcao");
-         livro2.put("valor", "R$ 500");
+         livro2.put("valor",  500);
          livros.add(livro2);
          
+         livro3.put("titulo", "PHP x JS: orientado a obejeto ");
+        livro3.put("ano", 2017);
+        livro3.put("genero", "fantasia");
+         livro3.put("valor",  670);
+         livros.add(livro3);
+         
+         livro4.put("titulo", "delph x C#: a Parceria ");
+        livro4.put("ano", 1988);
+        livro4.put("genero", "ficcao");
+         livro4.put("valor",  900);
+         livros.add(livro4);
+         
+         livro5.put("titulo", "java x JS: Brincando com codigos ");
+        livro5.put("ano", 2021);
+        livro5.put("genero", "ficcao");
+         livro5.put("valor",  900);
+         livros.add(livro5);
+         
+                  Collections.sort(livros,(l1,l2)->{return l1.getInt("valor")-l2.getInt("valor");});
+                          
          for(JSONObject item : livros)
                  {
                          System.out.println(item.get("titulo"));
@@ -41,136 +81,23 @@ public class Livros {
                          
                          System.out.println(item.get("valor"));
                          
+                         
+                         
+    }
+    }
+
+    private static class json {
+
+        private static String get(String titulo) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public json() {
+        }
     }
          
                          
        
-         
-         
-         
-       /* //serializa para uma string e imprime
-        String json_string = livro.toString();
-        System.out.println("objeto original -> " + json_string);
-        System.out.println();
-         
-        //altera o titulo e imprime a nova configuração do objeto
-        livro.put("titulo", "JSON x XML: o Confronto das Linguagens");
-        json_string = livro.toString();
-        System.out.println("objeto com o título modificado -> " + json_string);
-        System.out.println();
-         
-        //recupera campo por campo com o método get() e imprime cada um
-        String titulo = livro.getString("titulo");
-        Integer ano = livro.getInt("ano");
-        String genero = livro.getString("genero");
-         
-        System.out.println("titulo: " + titulo);
-        System.out.println("ano: " + ano);
-        System.out.println("genero: " + genero);
-        
-        
-        
-        
-        
-         Biblioteca biblio = new Biblioteca();
-       
-        biblio.setNome(JOptionPane.showInputDialog("Nome da Biblioteca:"));
-        biblio.setLocal(JOptionPane.showInputDialog("Localização da Biblioteca:"));
-        biblio.criaLivros(Integer.parseInt(
-                JOptionPane.showInputDialog("Capacidade de Livros:")));
-       
-        Livro livro;
-        int opcao = 0;
-        String opcoes =
-          "Biblioteca: "+ biblio.getNome()+
-          "\nLocalização: "+ biblio.getLocal()+
-          "\n\n***Opções*** "+
-          "\n1. Cadastrar Livro"+
-          "\n2. Pesquisar Livro (código)"+
-          "\n3. Pesquisar Livro (título)"+
-          "\n4. Listar Livros"+
-          "\n5. Informações"+
-          "\n6. Finalizar"+
-          "\n\nSelecione a opção: ";
-
-        while (opcao != 6)
-        {
-            opcao = Integer.parseInt(JOptionPane.showInputDialog(null,opcoes,
-                    "Biblioteca "+biblio.getNome(),JOptionPane.QUESTION_MESSAGE));
-
-            switch(opcao)
-            {
-              case 1:
-                biblio.incluirLivro(digitarLivro());
-                JOptionPane.showMessageDialog(null, "Livro Cadastrado!\nTotal: "+
-                        biblio.getQuantidade()+" livro(s)");
-                break;
-              case 2:
-                  livro = biblio.obterLivro(Integer.parseInt(
-                          JOptionPane.showInputDialog("Digite código para pesquisar:")));
-                  if (livro != null)
-                      mostrarLivro(livro,biblio.getNome());
-                  else
-                      JOptionPane.showMessageDialog(null, "Livro Não Localizado!");
-                break;
-              case 3:
-                  livro = biblio.obterLivro(Integer.parseInt(JOptionPane.showInputDialog("Digite Título do Livro para pesquisar:")));
-                  if (livro != null)
-                      mostrarLivro(livro,biblio.getNome());
-                  else
-                      JOptionPane.showMessageDialog(null, "Livro Não Localizado!");
-                break;
-              case 4:
-              {
-                  StringBuilder lista = new StringBuilder();
-                  lista.append("Lista de Livros Cadastrados:\n");
-                  for (int i=0;i<biblio.getQuantidade();i++)
-                  {
-                      livro = biblio.getLivro(i);
-                      lista.append(livro.getCodigo()).append(" - ").append(livro.getTitulo()).append(" - ").append(livro.getAutor()).append(" - ").append(livro.getNumPaginas()).append(" pags.\n");
-                  }
-                  lista.append("Total: ").append(biblio.getQuantidade()).append(" livro(s)");
-                  JOptionPane.showMessageDialog(null, lista.toString());
-                  break;
-              }
-              case 5:
-                    JOptionPane.showMessageDialog(null, "\n"+"Capacidade de Livros: "+
-                            "Informações da Biblioteca\n"+
-                            "Nome da Biblioteca: "+biblio.getNome()+"\n"+
-                                    "Localização: "+biblio.getNome()+biblio.getCapacidade()+"\n"+
-                            "Existem até o momento\n"+biblio.getQuantidade()+
-                            " livro(s) cadastrado(s)");
-                    break;
-            }
-        }
-        System.out.println("# Fim do Programa #");
-        System.out.println("bye...");
-    }
-   
-    static Livro digitarLivro()
-    {
-        Livro liv = new Livro();
-        liv.setCodigo(Integer.parseInt(JOptionPane.showInputDialog("Código do Livro:")));
-        liv.setTitulo(JOptionPane.showInputDialog("Título do Livro:"));
-        liv.setAutor(JOptionPane.showInputDialog("Autor do Livro:"));
-        liv.setISBN(JOptionPane.showInputDialog("Número ISBN do Livro:"));
-        liv.setNumPaginas(Integer.parseInt(JOptionPane.showInputDialog("Numero de Páginas do Livro:")));
-        liv.setValorCompra(Float.parseFloat(JOptionPane.showInputDialog("Valor de Compra:")));
-        return liv;
-    }
-       
-    static void mostrarLivro(Livro x,String bib)
-    {
-        String texto = "Livro:\n"+
-        "\nCódigo: "+x.getCodigo()+
-        "\nTítulo: "+x.getTitulo()+
-        "\nAutor: "+x.getAutor()+
-        "\nISBN: "+x.getISBN()+
-        "\nPáginas: "+x.getNumPaginas()+
-        "\nValor: "+x.getValorCompra();
-        JOptionPane.showMessageDialog(null, texto, "Biblioteca: "+bib,
-                JOptionPane.WARNING_MESSAGE);
-*/    
 }
-    
-}
+         
+      
